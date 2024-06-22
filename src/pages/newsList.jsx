@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setArticles } from "../reducers/articleSlice";
 import "./pages.css";
-import DefaultImage from '../assets/default_news.png'
 
 const categories = [
   "business",
@@ -16,8 +15,8 @@ const categories = [
   "technology",
 ];
 
-const DEFAULT_IMAGE = DefaultImage;
-
+// Default image URL for articles without images
+const DEFAULT_IMAGE = "https://example.com/default-image.jpg";
 
 const NewsList = () => {
   const dispatch = useDispatch();
@@ -32,9 +31,18 @@ const NewsList = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&page=${page}&pageSize=10&q=${searchQuery}&apiKey=6883f8fd380e42908cd9578c2cdc170f`
+          `https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&page=${page}&pageSize=10&q=${searchQuery}&apiKey=6883f8fd380e42908cd9578c2cdc170f`,
+          {
+            headers: {
+              'Accept': 'application/json'
+            }
+          }
         );
-        dispatch(setArticles(response.data.articles));
+        if (response.status === 200) {
+          dispatch(setArticles(response.data.articles));
+        } else {
+          throw new Error(`Error fetching news: ${response.status}`);
+        }
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -81,11 +89,11 @@ const NewsList = () => {
               </Link>
             </div>
             <div className="image-container">
-            {article.urlToImage ? (
-                <img src={article.urlToImage} alt={article.title} />
-              ) : (
-                <img src={DEFAULT_IMAGE} alt="Default" />
-              )}
+              <img
+                src={article.urlToImage ? article.urlToImage : DEFAULT_IMAGE}
+                alt={article.title}
+                style={{ width: '100%' }}
+              />
             </div>
           </li>
         ))}
