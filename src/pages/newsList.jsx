@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setArticles } from "../reducers/articleSlice";
 import "./pages.css";
+import DefaultImage from '../assets/default_news.png';
 
 const categories = [
   "business",
@@ -14,9 +15,6 @@ const categories = [
   "sports",
   "technology",
 ];
-
-// Default image URL for articles without images
-const DEFAULT_IMAGE = "https://example.com/default-image.jpg";
 
 const NewsList = () => {
   const dispatch = useDispatch();
@@ -90,7 +88,7 @@ const NewsList = () => {
             </div>
             <div className="image-container">
               <img
-                src={article.urlToImage ? article.urlToImage : DEFAULT_IMAGE}
+                src={article.urlToImage ? article.urlToImage : DefaultImage}
                 alt={article.title}
                 style={{ width: '100%' }}
               />

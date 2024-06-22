@@ -2,10 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from '../reducers/favoritesSlice';
-import './pages.css'
-import DefaultImage from '../assets/default_news.png'
-
-const DEFAULT_IMAGE = DefaultImage;
+import './pages.css';
+import DefaultImage from '../assets/default_news.png';
 
 const ArticleDetail = () => {
   const { id } = useParams();
@@ -30,7 +28,7 @@ const ArticleDetail = () => {
     <div className='article-detail'>
       <h1>{article.title}</h1>
       <img 
-        src={article.urlToImage ? article.urlToImage : DEFAULT_IMAGE} 
+        src={article.urlToImage ? article.urlToImage : DefaultImage} 
         alt={article.title} 
         style={{ width: '100%' }} 
       />
