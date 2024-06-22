@@ -1,0 +1,54 @@
+/* src/App.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  li {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  img {
+    margin-right: 20px;
+  }
+}
